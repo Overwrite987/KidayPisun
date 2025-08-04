@@ -1,5 +1,5 @@
 
-# Unit: seconds
+# Unit: ticks
 reset-in: 10
 
 # Dick that will be thrown when the command is used without arguments,
