@@ -19,6 +19,17 @@
     </properties>
 
     <build>
+        <directory>${project.basedir}/target/kidaypisun</directory>
+        <resources>
+            <resource>
+                <directory>${resources.dir}/config</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${resources.dir}/pluginyml</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -29,71 +40,47 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${shade.plugin.version}</version>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>com.github.groundbreakingmc.kidaypisun.bstats.metrics</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.jeff_media.customblockdata</pattern>
+                            <shadedPattern>com.github.groundbreakingmc.kidaypisun.customblockdata
+                            </shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <minimizeJar>true</minimizeJar>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>kidaypisun</id>
-            <properties>
-                <final.name>KidayPisun</final.name>
-            </properties>
-            <build>
-                <finalName>${final.name}</finalName>
-                <directory>${project.basedir}/target/kidaypisun</directory>
-                <resources>
-                    <resource>
-                        <directory>${resources.dir}/config</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>${resources.dir}/pluginyml</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>${shade.plugin.version}</version>
-                        <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.bstats.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.jeff_media.customblockdata</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.customblockdata
-                                    </shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <filters>
-                                        <filter>
-                                            <artifact>*:*</artifact>
-                                            <excludes>
-                                                <exclude>META-INF/**</exclude>
-                                            </excludes>
-                                        </filter>
-                                    </filters>
-                                    <minimizeJar>true</minimizeJar>
-                                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
     <repositories>
         <repository>

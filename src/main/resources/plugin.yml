@@ -1,11 +1,10 @@
-name: ${name}
+name: "KidayPisun"
 version: ${project.version}
 
 main: com.github.groundbreakingmc.kidaypisun.KidayPisun
 api-version: 1.16
 
 author: GroundbreakingMC
-website: ${url}
 
 commands:
   pisun:
