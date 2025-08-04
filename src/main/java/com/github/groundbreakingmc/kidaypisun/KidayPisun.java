@@ -36,7 +36,8 @@ public final class KidayPisun extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.configValues.setupValues();
+        saveDefaultConfig();
+        this.configValues.setupValues(getConfig());
         this.setupCommand();
         this.registerEvent(new FallingBlackChangeListener(this));
         this.registerEvent(new DisconectListener(this));

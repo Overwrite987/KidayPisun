@@ -92,237 +92,14 @@
                     </plugin>
                 </plugins>
             </build>
-            <dependencies>
-                <!-- https://github.com/groundbreakingmc/MyLib -->
-                <dependency>
-                    <groupId>com.github.groundbreakingmc</groupId>
-                    <artifactId>MyLib</artifactId>
-                    <version>1.0</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>kidaypisun-mylib</id>
-            <properties>
-                <final.name>KidayPisun-MyLib</final.name>
-            </properties>
-            <build>
-                <finalName>${final.name}</finalName>
-                <directory>${project.basedir}/target/kidaypisun-mylib</directory>
-                <resources>
-                    <resource>
-                        <directory>${resources.dir}/config</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>${resources.dir}/pluginyml</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>${shade.plugin.version}</version>
-                        <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.bstats.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.jeff_media.customblockdata</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.customblockdata
-                                    </shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.github.groundbreakingmc.mylib</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.mylib</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <filters>
-                                        <filter>
-                                            <artifact>*:*</artifact>
-                                            <excludes>
-                                                <exclude>META-INF/**</exclude>
-                                            </excludes>
-                                        </filter>
-                                    </filters>
-                                    <minimizeJar>true</minimizeJar>
-                                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <!-- https://github.com/groundbreakingmc/MyLib -->
-                <dependency>
-                    <groupId>com.github.groundbreakingmc</groupId>
-                    <artifactId>MyLib</artifactId>
-                    <version>1.0</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>towerbuilder</id>
-            <properties>
-                <final.name>TowerBuilder</final.name>
-            </properties>
-            <build>
-                <finalName>${final.name}</finalName>
-                <directory>${project.basedir}/target/towerbuilder</directory>
-                <resources>
-                    <resource>
-                        <directory>${resources.dir}/config</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>${resources.dir}/srupluginyml</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>${shade.plugin.version}</version>
-                        <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.bstats.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.jeff_media.customblockdata</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.customblockdata
-                                    </shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <filters>
-                                        <filter>
-                                            <artifact>*:*</artifact>
-                                            <excludes>
-                                                <exclude>META-INF/**</exclude>
-                                            </excludes>
-                                        </filter>
-                                    </filters>
-                                    <minimizeJar>true</minimizeJar>
-                                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <!-- https://github.com/groundbreakingmc/MyLib -->
-                <dependency>
-                    <groupId>com.github.groundbreakingmc</groupId>
-                    <artifactId>MyLib</artifactId>
-                    <version>1.0</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>towerbuilder-mylib</id>
-            <properties>
-                <final.name>TowerBuilder-MyLib</final.name>
-            </properties>
-            <build>
-                <finalName>${final.name}</finalName>
-                <directory>${project.basedir}/target/towerbuilder-mylib</directory>
-                <resources>
-                    <resource>
-                        <directory>${resources.dir}/config</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>${resources.dir}/srupluginyml</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>${shade.plugin.version}</version>
-                        <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.bstats.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.jeff_media.customblockdata</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.customblockdata
-                                    </shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.github.groundbreakingmc.mylib</pattern>
-                                    <shadedPattern>com.github.groundbreakingmc.kidaypisun.mylib</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <filters>
-                                        <filter>
-                                            <artifact>*:*</artifact>
-                                            <excludes>
-                                                <exclude>META-INF/**</exclude>
-                                            </excludes>
-                                        </filter>
-                                    </filters>
-                                    <minimizeJar>true</minimizeJar>
-                                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <!-- https://github.com/groundbreakingmc/MyLib -->
-                <dependency>
-                    <groupId>com.github.groundbreakingmc</groupId>
-                    <artifactId>MyLib</artifactId>
-                    <version>1.0</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 
     <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
         <repository>
             <id>papermc-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
@@ -361,6 +138,12 @@
             <artifactId>custom-block-data</artifactId>
             <version>2.2.3</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.groundbreakingmc</groupId>
+            <artifactId>MyLib</artifactId>
+            <version>-e2b808d194-1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
