@@ -2,6 +2,10 @@ package com.github.groundbreakingmc.kidaypisun.utils;
 
 import com.github.groundbreakingmc.kidaypisun.utils.config.ConfigValues;
 import com.github.groundbreakingmc.mylib.collections.cases.Pair;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ReferenceSet;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -11,16 +15,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 @UtilityClass
 public class DickUtils {
 
-    private static final Set<UUID> FALLING_BLOCKS;
-    private static final Map<UUID, Pair<ConfigValues.Dick, Boolean>> MAIN_FALLING_BLOCKS;
+    private static final ReferenceSet<UUID> FALLING_BLOCKS;
+    private static final Reference2ObjectMap<UUID, Pair<ConfigValues.Dick, Boolean>> MAIN_FALLING_BLOCKS;
     public static final double OFFSET;
 
     public static void spawn(Player player, ConfigValues.Dick dick) {
@@ -101,8 +102,8 @@ public class DickUtils {
     }
 
     static {
-        FALLING_BLOCKS = new IdentityHashMap<UUID, Object>().keySet();
-        MAIN_FALLING_BLOCKS = new IdentityHashMap<>();
+        FALLING_BLOCKS = new ReferenceOpenHashSet<>();
+        MAIN_FALLING_BLOCKS = new Reference2ObjectOpenHashMap<>();
         OFFSET = 1.0D;
     }
 }

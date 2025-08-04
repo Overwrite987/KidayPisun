@@ -4,6 +4,8 @@ import com.github.groundbreakingmc.kidaypisun.commands.CommandManager;
 import com.github.groundbreakingmc.kidaypisun.listeners.DisconectListener;
 import com.github.groundbreakingmc.kidaypisun.listeners.FallingBlackChangeListener;
 import com.github.groundbreakingmc.kidaypisun.utils.config.ConfigValues;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.data.BlockData;
@@ -16,8 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.Constructor;
-import java.util.IdentityHashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Getter
@@ -27,11 +27,11 @@ public final class KidayPisun extends JavaPlugin {
     public static final PersistentDataType<BlockData, BlockData> PERSISTENT_DATA_TYPE;
 
     private final ConfigValues configValues;
-    private final Map<UUID, BukkitTask> spamming;
+    private final Reference2ObjectMap<UUID, BukkitTask> spamming;
 
     public KidayPisun() {
         this.configValues = new ConfigValues(this);
-        this.spamming = new IdentityHashMap<>();
+        this.spamming = new Reference2ObjectOpenHashMap<>();
     }
 
     @Override

@@ -1,5 +1,5 @@
 name: "KidayPisun"
-version: ${project.version}
+version: 1.0
 
 main: com.github.groundbreakingmc.kidaypisun.KidayPisun
 api-version: 1.16
