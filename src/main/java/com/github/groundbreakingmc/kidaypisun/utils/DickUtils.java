@@ -14,19 +14,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 @UtilityClass
-public final class DickUtils {
+public class DickUtils {
 
     private static final Set<UUID> FALLING_BLOCKS;
     private static final Map<UUID, Pair<ConfigValues.Dick, Boolean>> MAIN_FALLING_BLOCKS;
     public static final double OFFSET;
 
-    public static void spawn(final Player player, final ConfigValues.Dick dick) {
-        final Location playerLocation = player.getLocation();
-        final Location location = playerLocation.clone();
-        final World world = location.getWorld();
-        final Vector vector = player.getEyeLocation().getDirection().multiply(1.0);
+    public static void spawn(Player player, ConfigValues.Dick dick) {
+        Location playerLocation = player.getLocation();
+        Location location = playerLocation.clone();
+        World world = location.getWorld();
+        Vector vector = player.getEyeLocation().getDirection().multiply(1.0);
 
-        final boolean horizontal = YawDirection.isSouthOrNorth(playerLocation);
+        boolean horizontal = YawDirection.isSouthOrNorth(playerLocation);
         if (horizontal) {
             location.setX(location.getX() + OFFSET);
             spawnFalling(world, vector, location, dick.bodyBlockData(), false);
@@ -42,8 +42,8 @@ public final class DickUtils {
         }
 
         for (int i = 0; i < dick.length(); i++) {
-            final boolean isMain = i == 0;
-            final FallingBlock fallingBlock = spawnFalling(
+            boolean isMain = i == 0;
+            FallingBlock fallingBlock = spawnFalling(
                     world,
                     vector,
                     location,
@@ -60,12 +60,12 @@ public final class DickUtils {
         spawnFalling(world, vector, location, dick.headBlockData(), false);
     }
 
-    private FallingBlock spawnFalling(final World world,
-                                      final Vector vector,
-                                      final Location location,
-                                      final BlockData blockData,
-                                      final boolean main) {
-        final FallingBlock fallingBlock = world.spawnFallingBlock(location, blockData);
+    private FallingBlock spawnFalling(World world,
+                                      Vector vector,
+                                      Location location,
+                                      BlockData blockData,
+                                      boolean main) {
+        FallingBlock fallingBlock = world.spawnFallingBlock(location, blockData);
         if (!main) {
             FALLING_BLOCKS.add(fallingBlock.getUniqueId());
         }
@@ -76,16 +76,16 @@ public final class DickUtils {
         return fallingBlock;
     }
 
-    public static boolean isPluginFallingBlock(final UUID entityUUID) {
+    public static boolean isPluginFallingBlock(UUID entityUUID) {
         return !FALLING_BLOCKS.isEmpty() && FALLING_BLOCKS.contains(entityUUID);
     }
 
-    public static void removeFromFallingBocks(final UUID entityUUID) {
+    public static void removeFromFallingBocks(UUID entityUUID) {
         FALLING_BLOCKS.remove(entityUUID);
     }
 
     @Nullable
-    public static Pair<ConfigValues.Dick, Boolean> getFromPluginMainFallingBlocks(final UUID entityUUID) {
+    public static Pair<ConfigValues.Dick, Boolean> getFromPluginMainFallingBlocks(UUID entityUUID) {
         if (MAIN_FALLING_BLOCKS.isEmpty()) {
             return null;
         }
@@ -93,7 +93,7 @@ public final class DickUtils {
         return MAIN_FALLING_BLOCKS.get(entityUUID);
     }
 
-    public static void removeFromMainFallingBocks(final UUID entityUUID) {
+    public static void removeFromMainFallingBocks(UUID entityUUID) {
         MAIN_FALLING_BLOCKS.remove(entityUUID);
     }
 

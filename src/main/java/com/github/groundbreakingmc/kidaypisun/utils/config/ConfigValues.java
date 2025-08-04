@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public final class ConfigValues {
+public class ConfigValues {
 
     private int resetTime;
     private Dick defaultDick;
@@ -23,7 +23,7 @@ public final class ConfigValues {
     @Getter(AccessLevel.NONE)
     private final KidayPisun plugin;
 
-    public ConfigValues(final KidayPisun plugin) {
+    public ConfigValues(KidayPisun plugin) {
         this.plugin = plugin;
     }
 
@@ -31,20 +31,20 @@ public final class ConfigValues {
 
         this.resetTime = config.getInt("reset-in");
 
-        final ConfigurationSection defaultDickSection = config.getConfigurationSection("default-dick");
+        ConfigurationSection defaultDickSection = config.getConfigurationSection("default-dick");
         this.defaultDick = this.getDick(defaultDickSection);
 
-        final Map<String, Dick> tempMap = new HashMap<>();
+        Map<String, Dick> tempMap = new HashMap<>();
 
-        final ConfigurationSection dickSection = config.getConfigurationSection("dicks");
-        for (final String key : dickSection.getKeys(false)) {
+        ConfigurationSection dickSection = config.getConfigurationSection("dicks");
+        for (String key : dickSection.getKeys(false)) {
             if (key.equalsIgnoreCase("reload")) {
                 this.plugin.getLogger().warning("Cannot create dick with the key \"reload\"!");
                 continue;
             }
 
-            final ConfigurationSection keySection = dickSection.getConfigurationSection(key);
-            final Dick dick = this.getDick(keySection);
+            ConfigurationSection keySection = dickSection.getConfigurationSection(key);
+            Dick dick = this.getDick(keySection);
             if (dick.length < 1) {
                 this.plugin.getLogger().warning("Cannot create dick with the length less then 1!");
                 continue;
@@ -56,7 +56,7 @@ public final class ConfigValues {
         this.dicks = ImmutableMap.copyOf(tempMap);
     }
 
-    private Dick getDick(final ConfigurationSection section) {
+    private Dick getDick(ConfigurationSection section) {
         return new Dick(
                 this.getBlockData(section, true),
                 this.getBlockData(section, false),
@@ -66,7 +66,7 @@ public final class ConfigValues {
         );
     }
 
-    private BlockData getBlockData(final ConfigurationSection section, final boolean head) {
+    private BlockData getBlockData(ConfigurationSection section, boolean head) {
         String materialName = section.getString(head ? "head-material" : "body-material");
 
         if (materialName == null) {

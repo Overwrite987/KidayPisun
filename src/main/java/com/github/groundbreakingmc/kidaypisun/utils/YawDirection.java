@@ -5,9 +5,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 @UtilityClass
-public final class YawDirection {
+public class YawDirection {
 
-    public static boolean isSouthOrNorth(final Location location) {
+    public static boolean isSouthOrNorth(Location location) {
         float yaw = location.getYaw();
         if (yaw < 0.0F) {
             yaw += 360.0F;

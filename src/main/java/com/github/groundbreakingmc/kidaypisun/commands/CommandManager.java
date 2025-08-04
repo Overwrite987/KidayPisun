@@ -14,24 +14,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CommandManager implements TabExecutor {
+public class CommandManager implements TabExecutor {
 
     private final KidayPisun plugin;
     private final ConfigValues configValues;
 
-    public CommandManager(final KidayPisun plugin) {
+    public CommandManager(KidayPisun plugin) {
         this.plugin = plugin;
         this.configValues = plugin.getConfigValues();
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof final Player player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("Command for players only!");
             return true;
         }
 
-        final ConfigValues.Dick dick = args.length > 0 && !args[0].equalsIgnoreCase("default")
+        ConfigValues.Dick dick = args.length > 0 && !args[0].equalsIgnoreCase("default")
                 ? this.configValues.getDicks().get(args[0])
                 : this.configValues.getDefaultDick();
 
@@ -48,12 +48,12 @@ public final class CommandManager implements TabExecutor {
             }
 
             try {
-                final int period = args.length > 1 ? Integer.parseInt(args[1]) : 2;
+                int period = args.length > 1 ? Integer.parseInt(args[1]) : 2;
                 task = Bukkit.getScheduler().runTaskTimer(this.plugin, () ->
                         DickUtils.spawn(player, dick), 0L, period
                 );
                 this.plugin.addTask(player, task);
-            } catch (final NumberFormatException ex) {
+            } catch (NumberFormatException ex) {
                 sender.sendMessage("§cIncorrect numb: " + args[1]);
             }
         } else {
@@ -67,7 +67,7 @@ public final class CommandManager implements TabExecutor {
     public @NotNull List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player && sender.hasPermission("kidaypisun.use")) {
             if (args.length == 1) {
-                final List<String> dicks = new ArrayList<>(this.configValues.getDicks().keySet());
+                List<String> dicks = new ArrayList<>(this.configValues.getDicks().keySet());
                 dicks.add("default");
                 return dicks;
             } else if (args.length == 2) {

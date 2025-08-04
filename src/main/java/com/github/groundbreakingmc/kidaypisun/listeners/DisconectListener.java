@@ -6,21 +6,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public final class DisconectListener implements Listener {
+public class DisconectListener implements Listener {
 
     private final KidayPisun plugin;
 
-    public DisconectListener(final KidayPisun plugin) {
+    public DisconectListener(KidayPisun plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onQuit(final PlayerQuitEvent event) {
+    public void onQuit(PlayerQuitEvent event) {
         this.plugin.cancel(event.getPlayer());
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onKick(final PlayerKickEvent event) {
+    public void onKick(PlayerKickEvent event) {
         this.plugin.cancel(event.getPlayer());
     }
 }

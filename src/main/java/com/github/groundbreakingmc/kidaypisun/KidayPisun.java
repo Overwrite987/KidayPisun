@@ -49,25 +49,25 @@ public final class KidayPisun extends JavaPlugin {
     }
 
     private void setupCommand() {
-        final PluginCommand pisunCommand = super.getCommand("pisun");
-        final TabExecutor executor = new CommandManager(this);
+        PluginCommand pisunCommand = super.getCommand("pisun");
+        TabExecutor executor = new CommandManager(this);
         pisunCommand.setExecutor(executor);
     }
 
-    private void registerEvent(final Listener listener) {
+    private void registerEvent(Listener listener) {
         super.getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    public void addTask(final Player player, final BukkitTask task) {
+    public void addTask(Player player, BukkitTask task) {
         this.spamming.put(player.getUniqueId(), task);
     }
 
-    public BukkitTask removeTask(final Player player) {
+    public BukkitTask removeTask(Player player) {
         return this.spamming.remove(player.getUniqueId());
     }
 
-    public void cancel(final Player player) {
-        final BukkitTask task = this.spamming.remove(player.getUniqueId());
+    public void cancel(Player player) {
+        BukkitTask task = this.spamming.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
         }
@@ -81,13 +81,13 @@ public final class KidayPisun extends JavaPlugin {
     @SuppressWarnings("Unchecked")
     private static PersistentDataType<BlockData, BlockData> createPersistentDataType() {
         try {
-            final Constructor<?> constructor = PersistentDataType.PrimitivePersistentDataType.class
+            Constructor<?> constructor = PersistentDataType.PrimitivePersistentDataType.class
                     .getDeclaredConstructor(Class.class);
 
             constructor.setAccessible(true);
 
             return (PersistentDataType<BlockData, BlockData>) constructor.newInstance(BlockData.class);
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }

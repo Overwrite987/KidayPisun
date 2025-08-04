@@ -24,22 +24,22 @@ public class FallingBlackChangeListener implements Listener {
     private final KidayPisun plugin;
     private final ConfigValues configValues;
 
-    public FallingBlackChangeListener(final KidayPisun plugin) {
+    public FallingBlackChangeListener(KidayPisun plugin) {
         this.plugin = plugin;
         this.configValues = plugin.getConfigValues();
     }
 
     @EventHandler
-    public void onBlockChange(final EntityChangeBlockEvent event) {
-        final Entity entity = event.getEntity();
+    public void onBlockChange(EntityChangeBlockEvent event) {
+        Entity entity = event.getEntity();
         if (entity instanceof FallingBlock) {
-            final UUID entityUUID = entity.getUniqueId();
+            UUID entityUUID = entity.getUniqueId();
             if (DickUtils.isPluginFallingBlock(entityUUID)) {
                 event.setCancelled(true);
                 entity.remove();
                 DickUtils.removeFromFallingBocks(entityUUID);
             } else {
-                final Pair<ConfigValues.Dick, Boolean> data = DickUtils.getFromPluginMainFallingBlocks(entityUUID);
+                Pair<ConfigValues.Dick, Boolean> data = DickUtils.getFromPluginMainFallingBlocks(entityUUID);
                 if (data == null) {
                     return;
                 }
@@ -47,7 +47,7 @@ public class FallingBlackChangeListener implements Listener {
                 event.setCancelled(true);
                 entity.remove();
 
-                final Location location = event.getBlock().getLocation().clone();
+                Location location = event.getBlock().getLocation().clone();
                 this.buildDick(location, data);
 
                 DickUtils.removeFromMainFallingBocks(entityUUID);
@@ -55,8 +55,8 @@ public class FallingBlackChangeListener implements Listener {
         }
     }
 
-    private void buildDick(final Location location,
-                           final Pair<ConfigValues.Dick, Boolean> data) {
+    private void buildDick(Location location,
+                           Pair<ConfigValues.Dick, Boolean> data) {
         if (data.getRight()) {
             location.setX(location.getX() + DickUtils.OFFSET);
             this.build(location, data.getLeft().bodyBlockData());
@@ -83,16 +83,16 @@ public class FallingBlackChangeListener implements Listener {
         this.build(location, data.getLeft().headBlockData());
     }
 
-    private void build(final Location location, final BlockData blockData) {
-        final Block block = location.getBlock();
+    private void build(Location location, BlockData blockData) {
+        Block block = location.getBlock();
 
-        final CustomBlockData customBlockData = new CustomBlockData(block, this.plugin);
-        final Integer numb = customBlockData.get(KidayPisun.KEY, PersistentDataType.INTEGER);
+        CustomBlockData customBlockData = new CustomBlockData(block, this.plugin);
+        Integer numb = customBlockData.get(KidayPisun.KEY, PersistentDataType.INTEGER);
         if (numb != null) {
             return;
         }
 
-        final BlockData originalBlockData = block.getBlockData();
+        BlockData originalBlockData = block.getBlockData();
 
         block.setType(blockData.getMaterial());
         customBlockData.set(KidayPisun.KEY, PersistentDataType.INTEGER, 1);
