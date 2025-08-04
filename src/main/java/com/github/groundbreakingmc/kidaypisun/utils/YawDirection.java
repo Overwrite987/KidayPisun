@@ -2,7 +2,6 @@ package com.github.groundbreakingmc.kidaypisun.utils;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 @UtilityClass
 public class YawDirection {

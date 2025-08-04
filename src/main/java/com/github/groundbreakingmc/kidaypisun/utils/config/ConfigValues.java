@@ -1,7 +1,6 @@
 package com.github.groundbreakingmc.kidaypisun.utils.config;
 
 import com.github.groundbreakingmc.kidaypisun.KidayPisun;
-import com.github.groundbreakingmc.mylib.logger.console.LoggerFactory;
 import com.google.common.collect.ImmutableMap;
 import lombok.AccessLevel;
 import lombok.Getter;
