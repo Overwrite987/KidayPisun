@@ -34,7 +34,7 @@ public final class ConfigValues {
         final ConfigurationSection defaultDickSection = config.getConfigurationSection("default-dick");
         this.defaultDick = this.getDick(defaultDickSection);
 
-        final HashMap<String, Dick> tempMap = new HashMap<>();
+        final Map<String, Dick> tempMap = new HashMap<>();
 
         final ConfigurationSection dickSection = config.getConfigurationSection("dicks");
         for (final String key : dickSection.getKeys(false)) {
@@ -62,7 +62,7 @@ public final class ConfigValues {
                 this.getBlockData(section, false),
                 defaultDick == null
                         ? section.getInt("length")
-                        : section.getInt("length", this.defaultDick.length)
+                        : section.getInt("length", this.defaultDick.length())
         );
     }
 
@@ -71,8 +71,8 @@ public final class ConfigValues {
 
         if (materialName == null) {
             materialName = head
-                    ? this.defaultDick.headBlockData.getMaterial().name()
-                    : this.defaultDick.bodyBlockData.getMaterial().name();
+                    ? this.defaultDick.headBlockData().getMaterial().name()
+                    : this.defaultDick.bodyBlockData().getMaterial().name();
         }
 
         return Material.getMaterial(materialName.toUpperCase()).createBlockData();

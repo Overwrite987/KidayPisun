@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class KidayPisun extends JavaPlugin {
 
     public KidayPisun() {
         this.configValues = new ConfigValues(this);
-        this.spamming = new HashMap<>();
+        this.spamming = new IdentityHashMap<>();
     }
 
     @Override
@@ -52,7 +52,6 @@ public final class KidayPisun extends JavaPlugin {
         final PluginCommand pisunCommand = super.getCommand("pisun");
         final TabExecutor executor = new CommandManager(this);
         pisunCommand.setExecutor(executor);
-        pisunCommand.setTabCompleter(executor);
     }
 
     private void registerEvent(final Listener listener) {

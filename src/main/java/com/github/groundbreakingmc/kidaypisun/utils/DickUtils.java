@@ -21,11 +21,12 @@ public final class DickUtils {
     public static final double OFFSET;
 
     public static void spawn(final Player player, final ConfigValues.Dick dick) {
-        final Location location = player.getLocation().clone();
+        final Location playerLocation = player.getLocation();
+        final Location location = playerLocation.clone();
         final World world = location.getWorld();
         final Vector vector = player.getEyeLocation().getDirection().multiply(1.0);
 
-        final boolean horizontal = YawDirection.isSouthOrNorth(player);
+        final boolean horizontal = YawDirection.isSouthOrNorth(playerLocation);
         if (horizontal) {
             location.setX(location.getX() + OFFSET);
             spawnFalling(world, vector, location, dick.bodyBlockData(), false);
@@ -97,8 +98,8 @@ public final class DickUtils {
     }
 
     static {
-        FALLING_BLOCKS = new HashSet<>();
-        MAIN_FALLING_BLOCKS = new HashMap<>();
+        FALLING_BLOCKS = new IdentityHashMap<UUID, Object>().keySet();
+        MAIN_FALLING_BLOCKS = new IdentityHashMap<>();
         OFFSET = 1.0D;
     }
 }

@@ -1,13 +1,14 @@
 package com.github.groundbreakingmc.kidaypisun.utils;
 
 import lombok.experimental.UtilityClass;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 @UtilityClass
 public final class YawDirection {
 
-    public static boolean isSouthOrNorth(final Player player) {
-        float yaw = player.getLocation().getYaw();
+    public static boolean isSouthOrNorth(final Location location) {
+        float yaw = location.getYaw();
         if (yaw < 0.0F) {
             yaw += 360.0F;
         }
